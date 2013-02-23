@@ -745,14 +745,7 @@ limSendHalInitScanReq(tpAniSirGlobal pMac, tLimLimHalScanState nextState, tSirLi
         }
         else
         {
-            if (eSIR_CHECK_ROAMING_SCAN == trafficCheck)
-            {
-               pInitScanParam->scanMode = eHAL_SYS_MODE_ROAM_SCAN;
-            }
-            else
-            {
-               pInitScanParam->scanMode = eHAL_SYS_MODE_SCAN;
-            }
+            pInitScanParam->scanMode = eHAL_SYS_MODE_SCAN;
         }
         __limCreateInitScanRawFrame(pMac, pInitScanParam);
 #ifdef WLAN_FEATURE_P2P

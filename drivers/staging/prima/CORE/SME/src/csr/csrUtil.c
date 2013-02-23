@@ -2424,7 +2424,7 @@ tANI_BOOLEAN csrIsPhyModeMatch( tpAniSirGlobal pMac, tANI_U32 phyMode,
                                 tDot11fBeaconIEs *pIes)
 {
     tANI_BOOLEAN fMatch = FALSE;
-    eCsrPhyMode phyModeInBssDesc, phyMode2;
+    eCsrPhyMode phyModeInBssDesc = 0, phyMode2;
     eCsrCfgDot11Mode cfgDot11ModeToUse = eCSR_CFG_DOT11_MODE_TAURUS;
     tANI_U32 bitMask, loopCount;
 
@@ -4230,7 +4230,7 @@ tANI_U8 csrRetrieveRsnIe( tHalHandle hHal, tANI_U32 sessionId, tCsrRoamProfile *
     {
         if ( !csrIsProfileRSN( pProfile ) ) break;
 #ifdef FEATURE_WLAN_LFR
-        if (csrRoamIsFastRoamEnabled(pMac, sessionId))
+        if (csrRoamIsFastRoamEnabled(pMac))
         {
             // If "Legacy Fast Roaming" is enabled ALWAYS rebuild the RSN IE from 
             // scratch. So it contains the current PMK-IDs
@@ -6277,10 +6277,7 @@ tANI_BOOLEAN csrIsChannelPresentInList(
     int i = 0;
 
     // Check for NULL pointer
-    if (!pChannelList || (numChannels == 0))
-    {
-       return FALSE;
-    }
+    if (!pChannelList) return FALSE;
 
     // Look for the channel in the list
     for (i = 0; i < numChannels; i++)
